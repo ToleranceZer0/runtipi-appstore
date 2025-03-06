@@ -1,0 +1,19 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "nzbhydra",
+  "port": 5076,
+  "available": true,
+  "exposable": true,
+  "id": "nzbhydra",
+  "tipi_version": 3,
+  "version": "4.3.3",
+  "categories": ["media", "utilities", "data"],
+  "description": "NZBHydra 2 is a meta search for newznab indexers and torznab trackers. It provides easy access to newznab indexers and many torznab trackers via Jackett. You can search all your indexers and trackers from one place and use it as an indexer source for tools like Sonarr, Radarr, Lidarr or CouchPotato.",
+  "short_desc": "NZBHydra 2 is a meta search for newznab indexers and torznab trackers",
+  "author": "NZBHydra",
+  "source": "https://github.com/theotherp/nzbhydra2/",
+  "form_fields": [],
+  "supported_architectures": ["arm64", "amd64"],
+  "created_at": 1691943801422,
+  "updated_at": 1724250967000
+}

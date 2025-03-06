@@ -1,0 +1,58 @@
+services:
+  adminer:
+    image: ghcr.io/shyim/adminerevo@sha256:78753d7dbe17d65663f11448f4b40559a8ef10a9bbf8ce4c2b9124b8c0372a5a
+    container_name: adminer
+    depends_on:
+      - 'adminer-db'
+    ports:
+      - '${APP_PORT}:8080'
+    restart: unless-stopped
+    volumes:
+      - "${APP_DATA_DIR}/www/adminer:/var/www/html/"
+      - "${APP_DATA_DIR}/adminer/conf:/etc/php/"
+    networks:
+      - tipi_main_network
+    labels:
+      # Main
+      traefik.enable: true
+      traefik.http.middlewares.sabnzbd-web-redirect.redirectscheme.scheme: https
+      traefik.http.services.sabnzbd.loadbalancer.server.port: 8080
+      # Web
+      traefik.http.routers.sabnzbd-insecure.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.sabnzbd-insecure.entrypoints: web
+      traefik.http.routers.sabnzbd-insecure.service: adminer
+      traefik.http.routers.sabnzbd-insecure.middlewares: adminer-web-redirect
+      # Websecure
+      traefik.http.routers.sabnzbd.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.sabnzbd.entrypoints: websecure
+      traefik.http.routers.sabnzbd.service: adminer
+      traefik.http.routers.sabnzbd.tls.certresolver: myresolver
+      # Local domain
+      traefik.http.routers.sabnzbd-local-insecure.rule: Host(`adminer.${LOCAL_DOMAIN}`)
+      traefik.http.routers.sabnzbd-local-insecure.entrypoints: web
+      traefik.http.routers.sabnzbd-local-insecure.service: adminer
+      traefik.http.routers.sabnzbd-local-insecure.middlewares: adminer-web-redirect
+      # Local domain secure
+      traefik.http.routers.sabnzbd-local.rule: Host(`adminer.${LOCAL_DOMAIN}`)
+      traefik.http.routers.sabnzbd-local.entrypoints: websecure
+      traefik.http.routers.sabnzbd-local.service: adminer
+      traefik.http.routers.sabnzbd-local.tls: true
+      runtipi.managed: true
+
+  adminer-db:
+    image: 'mariadb'
+    container_name: adminer-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_USER: adminer
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: adminer
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --innodb-buffer-pool-size=128M 
+    volumes:
+      - "${APP_DATA_DIR}/data/mysql:/var/lib/mysql"
+      - "${APP_DATA_DIR}/etc/mysql:/etc/mysql"
+    networks:
+      - tipi_main_network
+    labels:
+      runtipi.managed: true
