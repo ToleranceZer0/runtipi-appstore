@@ -1,9 +1,10 @@
 {
-  "$schema": "../schema.json",
+  "$schema": "../app-info-schema.json",
   "name": "adminer",
   "port": 9010,
   "available": true,
   "exposable": true,
+  "dynamic_config": true,
   "id": "adminer",
   "tipi_version": 3,
   "version": "4.3.3",
