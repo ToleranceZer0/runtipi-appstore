@@ -1,6 +1,6 @@
 services:
   adminer:
-    image: ghcr.io/shyim/adminerevo@sha256:78753d7dbe17d65663f11448f4b40559a8ef10a9bbf8ce4c2b9124b8c0372a5a
+    image: ghcr.io/shyim/adminerevo:latest
     container_name: adminer
     depends_on:
       - 'adminer-db'
