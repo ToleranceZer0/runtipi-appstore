@@ -25,9 +25,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.7
       - name: Self-hosted Renovate
+<<<<<<< Updated upstream
         uses: renovatebot/github-action@v41.0.14
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
+=======
+<<<<<<< HEAD
+        uses: renovatebot/github-action@v41.0.12
+       # with:
+        #  token: ${{ secrets.RENOVATE_TOKEN }}
+=======
+        uses: renovatebot/github-action@v41.0.14
+        with:
+          token: ${{ secrets.RENOVATE_TOKEN }}
+>>>>>>> f0ed49ffc6b5b7b6d46a32987fee2a3dc83d2c6a
+>>>>>>> Stashed changes
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
