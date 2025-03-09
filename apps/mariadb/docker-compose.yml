@@ -4,7 +4,7 @@ services:
     container_name: sql-db
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MARIADB_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --innodb-buffer-pool-size=128M 
     volumes:
       - "${APP_DATA_DIR}/data/mysql:/var/lib/mysql"
