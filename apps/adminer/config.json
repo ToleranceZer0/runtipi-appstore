@@ -7,7 +7,7 @@
   "dynamic_config": true,
   "id": "adminer",
   "tipi_version": 3,
-  "version": "4.3.3",
+  "version": "4.4",
   "categories": ["media", "utilities", "data"],
   "description": "Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP.",
   "short_desc": "Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others via plugin..",

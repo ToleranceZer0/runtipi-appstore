@@ -6,7 +6,7 @@
   "dynamic_config": true,
   "id": "mariadb",
   "tipi_version": 3,
-  "version": "4.3.3",
+  "version": "5",
   "categories": ["media", "utilities", "data"],
   "description": "MariaDB Server is a high performing open source relational database, forked from MySQL.",
   "short_desc": "MariaDB Server is a high performing open source relational database, forked from MySQL.",
