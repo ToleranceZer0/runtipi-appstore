@@ -13,7 +13,14 @@
   "short_desc": "Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others via plugin..",
   "author": "adminer",
   "source": "https://www.adminer.org/",
-  "form_fields": [  ],
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "DB_ROOT_PASSWORD",
+      "min": 32,
+      "env_variable": "DB_ROOT_PASSWORD"
+    }
+  ],
   "supported_architectures": ["arm64", "amd64"],
   "created_at": 1691943801422,
   "updated_at": 1724250967000

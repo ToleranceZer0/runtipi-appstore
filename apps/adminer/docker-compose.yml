@@ -2,12 +2,8 @@ services:
   adminer:
     image: ghcr.io/shyim/adminerevo:latest
     container_name: adminer
-    environment:
-      ADMINER_DEFAULT_SERVER: sql-db
-      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
-      MYSQL_USER: adminer
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
-      MYSQL_DATABASE: adminer
+    depends_on:
+      - 'adminer-db'
     ports:
       - '${APP_PORT}:8080'
     restart: unless-stopped
@@ -16,8 +12,6 @@ services:
       - "${APP_DATA_DIR}/adminer/conf:/etc/php/"
     networks:
       - tipi_main_network
-#    depends_on:
-#      - 'sql-db'
     labels:
       # Main
       traefik.enable: true
@@ -43,5 +37,23 @@ services:
       traefik.http.routers.sabnzbd-local.entrypoints: websecure
       traefik.http.routers.sabnzbd-local.service: adminer
       traefik.http.routers.sabnzbd-local.tls: true
+      # Runtipi managed
       runtipi.managed: true
-   
+
+  adminer-db:
+    image: 'mariadb'
+    container_name: adminer-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MARIADB_USER: adminer
+      MARIADB_PASSWORD: "${DB_PASSWORD}"
+      MARIADB_DATABASE: adminer
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --innodb-buffer-pool-size=128M 
+    volumes:
+      - "${APP_DATA_DIR}/data/mysql:/var/lib/mysql"
+      - "${APP_DATA_DIR}/etc/mysql:/etc/mysql"
+    networks:
+      - tipi_main_network
+    labels:
+      runtipi.managed: true
