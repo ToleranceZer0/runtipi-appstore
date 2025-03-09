@@ -67,8 +67,9 @@ services:
     volumes:
       - ${APP_DATA_DIR}/postgresql/database:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD:  "${DB_PASSWORD}"
+      POSTGRES_ROOT: "${DB_PASSWORD}"
       POSTGRES_USER: spotweb
+      POSTGRES_PASSWORD: spotweb
       POSTGRES_DB: spotweb
 
     networks:
