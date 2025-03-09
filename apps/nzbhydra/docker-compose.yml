@@ -9,8 +9,8 @@ services:
       - ${APP_PORT}:5076
     volumes:
       - ${APP_DATA_DIR}/config:/config
-      - ${ROOT_FOLDER_HOST}/media/usenet/watch:/media/usenet/watch
-      - ${ROOT_FOLDER_HOST}/media/usenet/torrents:/media/torrents/watch
+      - ${ROOT_FOLDER_HOST}/media/usenet:/media/usenet/watch
+      - ${ROOT_FOLDER_HOST}/media/torrents:/media/torrents/watch
     environment:
       - PUID=1000
       - PGID=1000

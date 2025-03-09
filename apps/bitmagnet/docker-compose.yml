@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   bitmagnet:
-    image: ghcr.io/bitmagnet-io/bitmagnet:v0.10.0
+    image: ghcr.io/bitmagnet-io/bitmagnet:latest
     restart: unless-stopped
     command:
       - worker

@@ -2,7 +2,7 @@
   "$schema": "../dynamic-compose-schema.json",
   "services": [
     {
-      "image": "ghcr.io/bitmagnet-io/bitmagnet:v0.10.0",
+      "image": "ghcr.io/bitmagnet-io/bitmagnet:latest",
       "name": "bitmagnet",
       "internalPort": 3333,
       "isMain": true,

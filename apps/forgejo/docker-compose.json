@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "forgejo",
-      "image": "codeberg.org/forgejo/forgejo:1.21.11-0",
+      "image": "codeberg.org/forgejo/forgejo:10",
       "isMain": true,
       "internalPort": 3000,
       "addPorts": [
@@ -31,7 +31,7 @@
     },
     {
       "name": "forgejo-db",
-      "image": "postgres:14",
+      "image": "postgres:17",
       "environment": {
         "POSTGRES_USER": "forgejo",
         "POSTGRES_PASSWORD": "${FORGEJO_DB_PASSWORD}",
