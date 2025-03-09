@@ -12,7 +12,14 @@
   "short_desc": "MariaDB Server is a high performing open source relational database, forked from MySQL.",
   "author": "mariadb",
   "source": "https://mariadb.org/",
-  "form_fields": [  ],
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "DB_ROOT_PASSWORD",
+      "min": 40,
+      "env_variable": "DB_ROOT_PASSWORD"
+    }
+  ],
   "supported_architectures": ["arm64", "amd64"],
   "created_at": 1691943801422,
   "updated_at": 1724250967000
