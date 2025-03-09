@@ -16,4 +16,4 @@ services:
       traefik.enable: true
       traefik.http.middlewares.sabnzbd-web-redirect.redirectscheme.scheme: https
       traefik.http.services.sabnzbd.loadbalancer.server.port: 8080
-      runtipi.managed: true
+      #runtipi.managed: true
