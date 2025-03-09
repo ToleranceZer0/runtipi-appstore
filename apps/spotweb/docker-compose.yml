@@ -16,7 +16,7 @@ services:
       DB_PORT: "5432"
       DB_NAME: "spotweb"
       DB_USER: "spotweb"
-      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_PASSWORD: "spotweb"
     volumes:
       - ${APP_DATA_DIR}/spotweb/config:/config
     restart: unless-stopped
@@ -67,10 +67,10 @@ services:
     volumes:
       - ${APP_DATA_DIR}/postgresql/database:/var/lib/postgresql/data
     environment:
-      POSTGRES_ROOT_PASSWORD: "${DB_PASSWORD}"
-      POSTGRES_USER: spotweb
+#      POSTGRES_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+#      POSTGRES_USER: spotweb
       POSTGRES_PASSWORD: spotweb
-      POSTGRES_DB: spotweb
+ #     POSTGRES_DB: spotweb
 
     networks:
       - tipi_main_network
