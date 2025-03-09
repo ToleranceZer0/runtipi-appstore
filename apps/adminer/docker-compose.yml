@@ -44,3 +44,6 @@ services:
       traefik.http.routers.sabnzbd-local.service: adminer
       traefik.http.routers.sabnzbd-local.tls: true
       runtipi.managed: true
+
+include:
+   - ../mariadb/docker-compose.yml
