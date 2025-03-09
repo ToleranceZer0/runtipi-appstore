@@ -7,9 +7,9 @@ services:
     ports:
       - '${APP_PORT}:8080'
     restart: unless-stopped
-    volumes:
-      - "${APP_DATA_DIR}/www/adminer:/var/www/html/"
-      - "${APP_DATA_DIR}/adminer/conf:/etc/php/"
+#    volumes:
+#      - "${APP_DATA_DIR}/www/adminer:/var/www/html/"
+#      - "${APP_DATA_DIR}/adminer/conf:/etc/php/"
     networks:
       - tipi_main_network
     labels:
@@ -46,13 +46,13 @@ services:
     restart: unless-stopped
     environment:
       MARIADB_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
-      MARIADB_USER: adminer
-      MARIADB_PASSWORD: "${DB_PASSWORD}"
-      MARIADB_DATABASE: adminer
-    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --innodb-buffer-pool-size=128M 
-    volumes:
-      - "${APP_DATA_DIR}/data/mysql:/var/lib/mysql"
-      - "${APP_DATA_DIR}/etc/mysql:/etc/mysql"
+#      MARIADB_USER: adminer
+#      MARIADB_PASSWORD: "${DB_PASSWORD}"
+#      MARIADB_DATABASE: adminer
+#    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --innodb-buffer-pool-size=128M 
+#    volumes:
+#      - "${APP_DATA_DIR}/data/mysql:/var/lib/mysql"
+#      - "${APP_DATA_DIR}/etc/mysql:/etc/mysql"
     networks:
       - tipi_main_network
     labels:
