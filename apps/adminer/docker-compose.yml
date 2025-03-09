@@ -16,8 +16,8 @@ services:
       - "${APP_DATA_DIR}/adminer/conf:/etc/php/"
     networks:
       - tipi_main_network
-    depends_on:
-      - 'sql-db'
+#    depends_on:
+#      - 'sql-db'
     labels:
       # Main
       traefik.enable: true
@@ -47,3 +47,4 @@ services:
 
 include:
    - ../mariadb/docker-compose.yml
+   
