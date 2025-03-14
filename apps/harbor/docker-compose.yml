@@ -13,12 +13,12 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /var/log/harbor/:/var/log/docker/:z
+      - ${APP_DATA_DIR}/log/harbor/:/var/log/docker/:z
       - type: bind
-        source: ./common/config/log/logrotate.conf
+        source: ${APP_DATA_DIR}/data/config/log/logrotate.conf
         target: /etc/logrotate.d/logrotate.conf
       - type: bind
-        source: ./common/config/log/rsyslog_docker.conf
+        source: ${APP_DATA_DIR}/data/config/log/rsyslog_docker.conf
         target: /etc/rsyslog.d/rsyslog_docker.conf
     ports:
       - 127.0.0.1:1514:10514
@@ -35,13 +35,13 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /data/registry:/storage:z
-      - ./common/config/registry/:/etc/registry/:z
+      - ${APP_DATA_DIR}/registry:/storage:z
+      - ${APP_DATA_DIR}/data/config/registry/:/etc/registry/:z
       - type: bind
         source: /data/secret/registry/root.crt
         target: /etc/registry/root.crt
       - type: bind
-        source: ./common/config/shared/trust-certificates
+        source: ${APP_DATA_DIR}/data/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
       - harbor
@@ -57,7 +57,7 @@ services:
     image: goharbor/harbor-registryctl:v2.1.3
     container_name: goharbor-registryctl
     env_file:
-      - ./common/config/registryctl/env
+      - ${APP_DATA_DIR}/data/config/registryctl/env
     restart: always
     cap_drop:
       - ALL
@@ -66,13 +66,13 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /data/registry:/storage:z
-      - ./common/config/registry/:/etc/registry/:z
+      - ${APP_DATA_DIR}/registry:/storage:z
+      - ${APP_DATA_DIR}/data/config/registry/:/etc/registry/:z
       - type: bind
-        source: ./common/config/registryctl/config.yml
+        source: ${APP_DATA_DIR}/data/config/registryctl/config.yml
         target: /etc/registryctl/config.yml
       - type: bind
-        source: ./common/config/shared/trust-certificates
+        source: ${APP_DATA_DIR}/data/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
       - harbor
@@ -96,12 +96,12 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /data/database:/var/lib/postgresql/data:z
+      - ${APP_DATA_DIR}/database:/var/lib/postgresql/data:z
     networks:
       harbor:
     dns_search: .
     env_file:
-      - ./common/config/db/env
+      - ${APP_DATA_DIR}/data/config/db/env
     depends_on:
       - log
     logging:
@@ -113,7 +113,7 @@ services:
     image: goharbor/harbor-core:v2.1.3
     container_name: harbor-core
     env_file:
-      - ./common/config/core/env
+      - ${APP_DATA_DIR}/data/config/core/env
     restart: always
     cap_drop:
       - ALL
@@ -121,11 +121,11 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /data/ca_download/:/etc/core/ca/:z
-      - /data/:/data/:z
-      - ./common/config/core/certificates/:/etc/core/certificates/:z
+      - ${APP_DATA_DIR}/ca_download/:/etc/core/ca/:z
+      - ${APP_DATA_DIR}/:/data/:z
+      - ${APP_DATA_DIR}/data/config/core/certificates/:/etc/core/certificates/:z
       - type: bind
-        source: ./common/config/core/app.conf
+        source: ${APP_DATA_DIR}/data/config/core/app.conf
         target: /etc/core/app.conf
       - type: bind
         source: /data/secret/core/private_key.pem
@@ -134,7 +134,7 @@ services:
         source: /data/secret/keys/secretkey
         target: /etc/core/key
       - type: bind
-        source: ./common/config/shared/trust-certificates
+        source: ${APP_DATA_DIR}/data/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
       harbor:
@@ -162,7 +162,7 @@ services:
       - NET_BIND_SERVICE
     volumes:
       - type: bind
-        source: ./common/config/portal/nginx.conf
+        source: ${APP_DATA_DIR}/data/config/portal/nginx.conf
         target: /etc/nginx/nginx.conf
     networks:
       - harbor
@@ -179,7 +179,7 @@ services:
     image: goharbor/harbor-jobservice:v2.1.3
     container_name: harbor-jobservice
     env_file:
-      - ./common/config/jobservice/env
+      - ${APP_DATA_DIR}/data/config/jobservice/env
     restart: always
     cap_drop:
       - ALL
@@ -188,12 +188,12 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /data/job_logs:/var/log/jobs:z
+      - ${APP_DATA_DIR}/job_logs:/var/log/jobs:z
       - type: bind
-        source: ./common/config/jobservice/config.yml
+        source: ${APP_DATA_DIR}/data/config/jobservice/config.yml
         target: /etc/jobservice/config.yml
       - type: bind
-        source: ./common/config/shared/trust-certificates
+        source: ${APP_DATA_DIR}/data/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
       - harbor
@@ -216,7 +216,7 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /data/redis:/var/lib/redis
+      - ${APP_DATA_DIR}/redis:/var/lib/redis
     networks:
       harbor:
     dns_search: .
@@ -239,17 +239,18 @@ services:
       - SETUID
       - NET_BIND_SERVICE
     volumes:
-      - ./common/config/nginx:/etc/nginx:z
-      - /data/secret/cert:/etc/cert:z
+      - ${APP_DATA_DIR}/data/config/nginx:/etc/nginx:z
+      - ${APP_DATA_DIR}/secret/cert:/etc/cert:z
       - type: bind
-        source: ./common/config/shared/trust-certificates
+        source: ${APP_DATA_DIR}/data/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
       - harbor
+      - tipi_main_network
     dns_search: .
     ports:
-      - 80:8080
-      - 443:8443
+      - ${APP_PORT}:8080
+#      - 443:8443
     depends_on:
       - registry
       - core

@@ -1,7 +1,7 @@
 {
   "$schema": "../app-info-schema.json",
   "name": "Harbor",
-  "port": 9010,
+  "port": 9011,
   "available": true,
   "exposable": true,
   "dynamic_config": true,
