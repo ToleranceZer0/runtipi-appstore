@@ -46,7 +46,7 @@ services:
     image: goharbor/harbor-registryctl:v2.12.2
     container_name: registryctl
     env_file:
-      - "${APP_DATA_DIR}/data/config/registryctl/env"
+      - "/Data/runtipi/user-config/harbor/config/registryctl/env"
     restart: always
     cap_drop:
       - ALL
@@ -84,7 +84,7 @@ services:
     networks:
       harbor:
     env_file:
-      - "${APP_DATA_DIR}/data/config/db/env"
+      - "/Data/runtipi/user-config/harbor/config/db/env"
     depends_on:
       - log
     logging:
@@ -97,7 +97,7 @@ services:
     image: goharbor/harbor-core:v2.12.2
     container_name: harbor-core
     env_file:
-      - "${APP_DATA_DIR}/data/config/core/env"
+      - "/Data/runtipi/user-config/harbor/config/core/env"
     restart: always
     cap_drop:
       - ALL
@@ -151,7 +151,7 @@ services:
     image: goharbor/harbor-jobservice:v2.12.2
     container_name: harbor-jobservice
     env_file:
-      - "${APP_DATA_DIR}/data/config/jobservice/env"
+      - "/Data/runtipi/user-config/harbor/config/jobservice/env"
     restart: always
     cap_drop:
       - ALL
@@ -243,7 +243,7 @@ services:
         syslog-address: "tcp://localhost:1514"
         tag: "trivy-adapter"
     env_file:
-      ${APP_DATA_DIR}/data/config/trivy-adapter/env
+      - /Data/runtipi/user-config/harbor/config/trivy-adapter/env
 networks:
   harbor:
     external: false
