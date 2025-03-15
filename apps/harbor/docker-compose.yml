@@ -151,7 +151,7 @@ services:
     image: goharbor/harbor-jobservice:v2.12.2
     container_name: harbor-jobservice
     env_file:
-      - ${APP_DATA_DIR}/data/common/config/jobservice/env
+      - "${APP_DATA_DIR}/data/common/config/jobservice/env"
     restart: always
     cap_drop:
       - ALL
