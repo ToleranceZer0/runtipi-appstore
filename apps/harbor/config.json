@@ -55,7 +55,7 @@
       "label": "ROBOT_SCANNER_NAME_PREFIX",
       "min": 8,
       "env_variable": "ROBOT_SCANNER_NAME_PREFIX"
-    },
+    }
   ],
   "supported_architectures": ["arm64", "amd64"],
   "created_at": 1691943801422,
