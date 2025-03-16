@@ -155,7 +155,6 @@ services:
       options:
         syslog-address: "tcp://localhost:1514"
         tag: "portal"
-
   jobservice:
     image: goharbor/harbor-jobservice:v2.12.2
     container_name: harbor-jobservice
