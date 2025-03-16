@@ -45,6 +45,8 @@ services:
   registryctl:
     image: goharbor/harbor-registryctl:v2.12.2
     container_name: registryctl
+    env_file:
+      - "${APP_DATA_DIR}/data/common/config/registryctl/app.env"
     restart: always
     cap_drop:
       - ALL
@@ -81,6 +83,8 @@ services:
       - ${APP_DATA_DIR}/data/data${APP_DATA_DIR}/data/database:/var/lib/postgresql${APP_DATA_DIR}/data/data:z
     networks:
       harbor:
+    env_file:
+      - "${APP_DATA_DIR}/data/common/config/db/app.env"
     depends_on:
       - log
     logging:
@@ -92,6 +96,8 @@ services:
   core:
     image: goharbor/harbor-core:v2.12.2
     container_name: harbor-core
+    env_file:
+      - "${APP_DATA_DIR}/data/common/config/core/app.env"
     restart: always
     cap_drop:
       - ALL
@@ -144,6 +150,8 @@ services:
   jobservice:
     image: goharbor/harbor-jobservice:v2.12.2
     container_name: harbor-jobservice
+    env_file:
+      - "${APP_DATA_DIR}/data/common/config/jobservice/app.env"
     restart: always
     cap_drop:
       - ALL
@@ -234,6 +242,8 @@ services:
       options:
         syslog-address: "tcp://localhost:1514"
         tag: "trivy-adapter"
+    env_file:
+      - "${APP_DATA_DIR}/data/common/config/trivy-adapter/app.env"
 networks:
   harbor:
     external: false
