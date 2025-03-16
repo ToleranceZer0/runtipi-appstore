@@ -47,8 +47,8 @@ services:
     container_name: registryctl
     restart: always
     environment:
-    CORE_SECRET=${CORE_SECRET}
-    JOBSERVICE_SECRET=${JOBSERVICE_SECRET}
+      - CORE_SECRET=${CORE_SECRET}
+      - JOBSERVICE_SECRET=${JOBSERVICE_SECRET}
     cap_drop:
       - ALL
     cap_add:
@@ -74,7 +74,7 @@ services:
     container_name: harbor-db
     restart: always
     environment:
-    POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     cap_drop:
       - ALL
     cap_add:
@@ -128,15 +128,15 @@ services:
     container_name: harbor-portal
     restart: always
     environment:
-    POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    HARBOR_ADMIN_PASSWORD=${HARBOR_ADMIN_PASSWORD}
-    CORE_SECRET=${CORE_SECRET}
-    JOBSERVICE_SECRET=${JOBSERVICE_SECRET}
-    REGISTRY_CREDENTIAL_USERNAME=harbor_registry_user
-    REGISTRY_CREDENTIAL_PASSWORD=${REGISTRY_CREDENTIAL_PASSWORD}
-    CSRF_KEY=${CSRF_KEY}
-    ROBOT_SCANNER_NAME_PREFIX=${ROBOT_SCANNER_NAME_PREFIX}
-    WITH_TRIVY=True
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - HARBOR_ADMIN_PASSWORD=${HARBOR_ADMIN_PASSWORD}
+      - CORE_SECRET=${CORE_SECRET}
+      - JOBSERVICE_SECRET=${JOBSERVICE_SECRET}
+      - REGISTRY_CREDENTIAL_USERNAME=harbor_registry_user
+      - REGISTRY_CREDENTIAL_PASSWORD=${REGISTRY_CREDENTIAL_PASSWORD}
+      - CSRF_KEY=${CSRF_KEY}
+      - ROBOT_SCANNER_NAME_PREFIX=${ROBOT_SCANNER_NAME_PREFIX}
+      - WITH_TRIVY=True
     cap_drop:
       - ALL
     cap_add:
@@ -160,10 +160,10 @@ services:
     container_name: harbor-jobservice
     restart: always
     environment:
-    CORE_SECRET=${CORE_SECRET}
-    JOBSERVICE_SECRET=${JOBSERVICE_SECRET}
-    REGISTRY_CREDENTIAL_USERNAME=harbor_registry_user
-    REGISTRY_CREDENTIAL_PASSWORD=${REGISTRY_CREDENTIAL_PASSWORD}
+      - CORE_SECRET=${CORE_SECRET}
+      - JOBSERVICE_SECRET=${JOBSERVICE_SECRET}
+      - REGISTRY_CREDENTIAL_USERNAME=harbor_registry_user
+      - REGISTRY_CREDENTIAL_PASSWORD=${REGISTRY_CREDENTIAL_PASSWORD}
     cap_drop:
       - ALL
     cap_add:
