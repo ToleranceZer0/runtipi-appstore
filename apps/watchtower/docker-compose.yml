@@ -1,0 +1,49 @@
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${APP_DATA_DIR}/watchtower/:/config/
+    environment:
+      - TZ=Europe/London
+      - WATCHTOWER_DEBUG=true
+      - WATCHTOWER_NOTIFICATIONS_LEVEL=debug
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_INCLUDE_STOPPED=true
+      - WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_NO_PULL=false
+      - WATCHTOWER_MONITOR_ONLY=false
+    networks:
+      - tipi_main_network
+    labels:
+      # Main
+      traefik.enable: true
+      traefik.http.middlewares.sabnzbd-web-redirect.redirectscheme.scheme: https
+      traefik.http.services.sabnzbd.loadbalancer.server.port: 8080
+      # Web
+      traefik.http.routers.sabnzbd-insecure.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.sabnzbd-insecure.entrypoints: web
+      traefik.http.routers.sabnzbd-insecure.service: watchtower
+      traefik.http.routers.sabnzbd-insecure.middlewares: watchtower-web-redirect
+      # Websecure
+      traefik.http.routers.sabnzbd.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.sabnzbd.entrypoints: websecure
+      traefik.http.routers.sabnzbd.service: watchtower
+      traefik.http.routers.sabnzbd.tls.certresolver: myresolver
+      # Local domain
+      traefik.http.routers.sabnzbd-local-insecure.rule: Host(`watchtower.${LOCAL_DOMAIN}`)
+      traefik.http.routers.sabnzbd-local-insecure.entrypoints: web
+      traefik.http.routers.sabnzbd-local-insecure.service: watchtower
+      traefik.http.routers.sabnzbd-local-insecure.middlewares: watchtower-web-redirect
+      # Local domain secure
+      traefik.http.routers.sabnzbd-local.rule: Host(`watchtower.${LOCAL_DOMAIN}`)
+      traefik.http.routers.sabnzbd-local.entrypoints: websecure
+      traefik.http.routers.sabnzbd-local.service: watchtower
+      traefik.http.routers.sabnzbd-local.tls: true
+      # Runtipi managed
+      runtipi.managed: true
+      # watchtower update
+      com.centurylinklabs.watchtower.enable: "true"
+      

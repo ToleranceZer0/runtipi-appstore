@@ -1,0 +1,20 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "watchtower",
+  "available": true,
+  "exposable": true,
+  "dynamic_config": true,
+  "id": "watchtower",
+  "tipi_version": 1,
+  "version": "1",
+  "categories": ["media", "utilities", "data"],
+  "description": "watchtower A container-based solution for automating Docker container base image updates. ",
+  "short_desc": "watchtower A container-based solution for automating Docker container base image updates. ",
+  "author": "watchtower",
+  "source": "https://containrrr.dev/watchtower/",
+  "form_fields": [
+  ],
+  "supported_architectures": ["arm64", "amd64"],
+  "created_at": 1691943801422,
+  "updated_at": 1724250967000
+}

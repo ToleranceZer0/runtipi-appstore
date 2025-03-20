@@ -42,3 +42,5 @@ services:
       traefik.http.routers.sabnzbd-local.service: sabnzbd
       traefik.http.routers.sabnzbd-local.tls: true
       runtipi.managed: true
+      # watchtower update
+      com.centurylinklabs.watchtower.enable: "true"

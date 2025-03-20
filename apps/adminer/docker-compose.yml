@@ -40,6 +40,8 @@ services:
       traefik.http.routers.sabnzbd-local.tls: true
       # Runtipi managed
       runtipi.managed: true
+      # watchtower update
+      com.centurylinklabs.watchtower.enable: "true"
 
   adminer-db:
     image: 'mariadb'

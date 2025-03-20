@@ -43,6 +43,8 @@ services:
       traefik.http.routers.atuin-local.tls: true
       # Runtipi managed
       runtipi.managed: true
+      # watchtower update
+      com.centurylinklabs.watchtower.enable: "true"
 
   atuin-db:
     container_name: atuin-db

@@ -55,6 +55,8 @@ services:
       traefik.http.routers.bitmagnet-local.service: bitmagnet
       traefik.http.routers.bitmagnet-local.tls: true
       runtipi.managed: true
+      # watchtower update
+      com.centurylinklabs.watchtower.enable: "true"
   bitmagnet-db:
     container_name: bitmagnet-db
     image: postgres:17-alpine

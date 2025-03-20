@@ -37,3 +37,5 @@ services:
       traefik.http.routers.baikal-local.service: baikal
       traefik.http.routers.baikal-local.tls: true
       runtipi.managed: true
+      # watchtower update
+      com.centurylinklabs.watchtower.enable: "true"
