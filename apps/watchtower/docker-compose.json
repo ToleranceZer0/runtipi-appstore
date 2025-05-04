@@ -1,0 +1,35 @@
+{
+  "services": [
+    {
+      "name": "watchtower",
+      "image": "containrrr/watchtower",
+      "environment": {
+        "TZ": "Europe/London",
+        "WATCHTOWER_DEBUG": "true",
+        "WATCHTOWER_NOTIFICATIONS_LEVEL": "debug",
+        "WATCHTOWER_CLEANUP": "true",
+        "WATCHTOWER_INCLUDE_STOPPED": "true",
+        "WATCHTOWER_POLL_INTERVAL": "86400",
+        "WATCHTOWER_NO_PULL": "false",
+        "WATCHTOWER_MONITOR_ONLY": "false"
+      },
+      "volumes": [
+        {
+          "hostPath": "/var/run/docker.sock",
+          "containerPath": "/var/run/docker.sock",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/watchtower/",
+          "containerPath": "/config/",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "isMain": true
+    }
+  ]
+}

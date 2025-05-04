@@ -1,0 +1,22 @@
+{
+  "services": [
+    {
+      "name": "adminer",
+      "image": "ghcr.io/tomas-kulhanek/adminerneo-docker:latest",
+      "internalPort": 8080,
+      "dependsOn": {
+        "adminer-db": {
+          "condition": "service_started"
+        }
+      },
+      "isMain": true
+    },
+    {
+      "name": "adminer-db",
+      "image": "mariadb",
+      "environment": {
+        "MARIADB_ROOT_PASSWORD": "${DB_ROOT_PASSWORD}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "services": [
+    {
+      "name": "spotweb",
+      "image": "jgeusebroek/spotweb",
+      "environment": {
+        "TZ": "Europe/Amsterdam",
+        "CRON_INTERVAL": "*/5 * * * *",
+        "DB_HOST": "spotweb-db",
+        "DB_ENGINE": "pdo_pgsql",
+        "DB_PORT": "5432",
+        "DB_NAME": "spotweb",
+        "DB_USER": "spotweb",
+        "DB_PASSWORD": "spotweb"
+      },
+      "internalPort": 80,
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/spotweb/config",
+          "containerPath": "/config",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "dependsOn": {
+        "spotweb-db": {
+          "condition": "service_started"
+        }
+      },
+      "isMain": true
+    },
+    {
+      "name": "spotweb-db",
+      "image": "postgres:17",
+      "environment": {
+        "POSTGRES_PASSWORD": "spotweb"
+      },
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/postgresql/database",
+          "containerPath": "/var/lib/postgresql/data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    }
+  ]
+}

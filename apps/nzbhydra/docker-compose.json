@@ -1,0 +1,39 @@
+{
+  "services": [
+    {
+      "name": "nzbhydra",
+      "image": "linuxserver/nzbhydra2:latest",
+      "environment": {
+        "PUID": "1000",
+        "PGID": "1000",
+        "TZ": "${TZ}"
+      },
+      "internalPort": 5076,
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/config",
+          "containerPath": "/config",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${ROOT_FOLDER_HOST}/media/usenet",
+          "containerPath": "/media/usenet/watch",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${ROOT_FOLDER_HOST}/media/torrents",
+          "containerPath": "/media/torrents/watch",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "hostname": "nzbhydra",
+      "isMain": true
+    }
+  ]
+}
